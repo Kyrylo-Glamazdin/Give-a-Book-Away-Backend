@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const db = require('./db');
+const httpRouter = require('./routes/index.js');
+
 
 const makeDatabase = require('./functions/makeDatabase');
 const seedDatabase = require('./functions/seedDatabase');
@@ -23,8 +25,9 @@ const syncDB = async() => {
 }
 
 const utilities = async() => {
+    app.use("/api", httpRouter);
     app.listen(PORT, () => {
-        console.log(`Running on port ${3500}`);
+        console.log(`Running on port ${PORT}`);
     })
 }
 
