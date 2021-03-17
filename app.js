@@ -25,6 +25,14 @@ const syncDB = async() => {
 }
 
 const utilities = async() => {
+    app.use((req, res, next) => {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader('Access-Control-Allow-Methods', '*');
+        res.setHeader('Access-Control-Allow-Headers', "*");
+        next();
+    });
+
+
     app.use("/api", httpRouter);
     app.listen(PORT, () => {
         console.log(`Running on port ${PORT}`);

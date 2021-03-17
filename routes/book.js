@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const booksKey = require('../config')
 
 const {Book} = require('../db/models');
 
 router.get('/', (request, response, next) => {
     //RECOMMENDED BOOKS BASED ON LOCATION? (for the main page)
+})
+
+router.get('/key', (request, response, next) => {
+    response.status(200).json(booksKey.booksKey)
 })
 
 router.get('/:id', (request, response, next) => {
