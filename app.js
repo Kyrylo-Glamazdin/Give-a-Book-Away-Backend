@@ -3,7 +3,6 @@ const app = express();
 const db = require('./db');
 const httpRouter = require('./routes/index.js');
 
-
 const makeDatabase = require('./functions/makeDatabase');
 const seedDatabase = require('./functions/seedDatabase');
 
@@ -32,6 +31,8 @@ const utilities = async() => {
         next();
     });
 
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
 
     app.use("/api", httpRouter);
     app.listen(PORT, () => {
