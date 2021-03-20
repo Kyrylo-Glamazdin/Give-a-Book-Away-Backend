@@ -5,7 +5,7 @@ const dbName = require('../functions/dbName');
 const db = new Sequelize(
     dbName,
     "postgres",
-    "",
+    "Equbqkxl1738",
     {
         "dialect": "postgres",
         "port": 5432,

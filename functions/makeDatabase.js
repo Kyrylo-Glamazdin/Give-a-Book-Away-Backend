@@ -3,7 +3,7 @@ const dbConfig = {
     user: 'postgres',
     host: 'localhost',
     port: 5432,
-    password: process.env.LOCAL_DATABASE_PASSWORD
+    password: "Equbqkxl1738"
 };
 
 const dbName = require('./dbName');
