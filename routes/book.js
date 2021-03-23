@@ -16,7 +16,7 @@ router.get('/key', (request, response, next) => {
 })
 
 router.get('/:id', (request, response, next) => {
-    Book.findByPk(request.params.id)
+    Book.findAll({where : {isbn: request.params.id}})
     .then(book => {
         response.status(200).send(book)
     })
