@@ -27,25 +27,25 @@ const seedDatabase = async() => {
 
     const books = await Promise.all([
         Book.create({
-            title: "Book 1", author: "Author 1", isbn: "1234", preview_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkB1qK13I9DeSy79dXGjGJC5UoMbCym9ioYg&usqp=CAU"
+            title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Book 2", author: "Author 2", isbn: "1235", preview_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTioiWoj41EsWNdtWg-9SXkOigp0PNYREKfNA&usqp=CAU"
+            title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn: "9789390287154", preview_image: "http://books.google.com/books/content?id=zWvuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Book 3", author: "Author 3", isbn: "1236", preview_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVMzIsRW3aVyq3JKEkGST6ogEe09honlpfZQ&usqp=CAU"
+            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Book 4", author: "Author 4", isbn: "1237", preview_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT21hq6ljHHF1hnaxsYWrut5KqlRmeb4gVtJw&usqp=CAU"
+            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Book 5", author: "Author 1", isbn: "1238", preview_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU7gvR8b4uAN9pyiBoz7F2UIxIfi9opCeZ4Q&usqp=CAU"
+            title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Book 6", author: "Author 2", isbn: "1239", preview_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU7gvR8b4uAN9pyiBoz7F2UIxIfi9opCeZ4Q&usqp=CAU"
+            title: "The Book Thief", author: "Markus Zusak", isbn: "9781473541870", preview_image: "http://books.google.com/books/content?id=FNF1CwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "Book 7", author: "Author 6", isbn: "1232", preview_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU7gvR8b4uAN9pyiBoz7F2UIxIfi9opCeZ4Q&usqp=CAU"
+            title: "Crime and Punishment", author: "Fyodor Dostoevsky", isbn: "9781473382886", preview_image: "http://books.google.com/books/content?id=bBl5CgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         })
     ])
 
