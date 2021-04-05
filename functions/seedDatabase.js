@@ -4,7 +4,7 @@ const seedDatabase = async() => {
     console.log("Seeding database");
     const users = await Promise.all([
         User.create({
-            name: "User 1", username: "user_1", zipcode: "11204"
+            name: "User 1", username: "user_1", zipcode: "10065"
         }),
         User.create({
             name: "User 2", username: "user_2", zipcode: "10012"

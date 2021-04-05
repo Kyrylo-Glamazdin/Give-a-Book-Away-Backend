@@ -4,6 +4,7 @@ const axios = require('axios');
 const {booksKey, distanceKey} = require('../config')
 
 const {Book, User} = require('../db/models');
+const {Op} = require('sequelize');
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(max) {
@@ -15,6 +16,7 @@ router.post('/recommended', (request, response, next) => {
     let userZipcode = request.body.zipcode
     let zipCodeArray = [userZipcode];
     Book.findAll({
+        where: {userId: {[Op.not]: request.body.id}}, //filter from books posted by user making the request
         include:[{
             model: User
         }]
@@ -23,19 +25,21 @@ router.post('/recommended', (request, response, next) => {
         if (bookList.length > 12) {
             let randomBooks = [];
             let len = 12;
+            let len2 = bookList.length
             while(len > 0) {
-                let selectedIndex = getRandomInt(len)
+                let selectedIndex = getRandomInt(len2)
                 let selectedBook = bookList[selectedIndex]
                 randomBooks.push(selectedBook)
-                let tempBook = bookList[len - 1]
-                bookList[len - 1] = selectedBook
+                let tempBook = bookList[len2 - 1]
+                bookList[len2 - 1] = selectedBook
                 bookList[selectedIndex] = tempBook
                 len--;
+                len2--;
             }
             bookList = randomBooks
         }
         for (let i = 0; i < bookList.length; i++) {
-            zipCodeArray.push(bookList[i].user.zipcode)
+                zipCodeArray.push(bookList[i].user.zipcode)
         }
         const zipCodeObject = {locations: zipCodeArray}
         axios.post("http://www.mapquestapi.com/directions/v2/routematrix?key=" + distanceKey, zipCodeObject)
@@ -60,7 +64,8 @@ router.post('/isbn', async (request, response, next) => {
     let zipCodeArray = [userZipcode];
     Book.findAll({
         where: {
-            isbn: bookObject.isbn
+            isbn: bookObject.isbn,
+            userId: {[Op.not]: request.body.id}
         },
         include:[{
             model: User
@@ -103,8 +108,16 @@ router.get('/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
-router.post('/', (request, response, next) => {
-    Book.create(request.body)
+router.post('/post', async (request, response, next) => {
+    let newBook = request.body.book
+    let associatedUser = request.body.user
+    Book.create({
+        title: newBook.title,
+        author: newBook.author,
+        isbn: newBook.isbn,
+        preview_image: newBook.preview_image,
+        userId: associatedUser.id
+    })
     .then(book => response.status(200).json(book))
     .catch(err => next(err));
 })
