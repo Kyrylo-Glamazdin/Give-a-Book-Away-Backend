@@ -13,11 +13,17 @@ const User = db.define('user', {
     },
     password: {
         type: Sequelize.STRING,
+        is: /^[0-9a-f]{64}$/i,
         allownull: false
     },
     zipcode: {
         type: Sequelize.STRING,
         allownull: false
+    },
+    email: {
+        type: Sequelize.STRING,
+        allownull: true,
+        isEmail: true
     }
 }, {
     timestamps: false

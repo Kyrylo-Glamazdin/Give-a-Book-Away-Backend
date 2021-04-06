@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -22,8 +23,30 @@ router.post('/signin', (request, response, next) => {
         }
     })
     .catch(err => next(err));
+})
 
-
+router.post('/signup', (request, response, next) => {
+    User.findOne({where : {username: request.body.userName}})
+    .then(userData => {
+        if(userData) {
+            response.status(200).json({ status: true, message: "This username is already taken"});
+        }
+        else {
+            User.create({
+                username: request.body.userName,
+                name: request.body.firstName + " " + request.body.lastName,
+                password: request.body.password,
+                zipcode: request.body.zip,
+                email: request.body.email
+            })
+            .then(user => {
+                user.password = undefined;
+                response.status(200).json({status: true, newUser: user})
+            })
+            .catch(err => next(err))
+        }
+    })
+    .catch(err => next(err));
 })
 
 module.exports = router;
