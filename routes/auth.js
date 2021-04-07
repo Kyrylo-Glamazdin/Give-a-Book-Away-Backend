@@ -1,4 +1,3 @@
-const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -6,8 +5,7 @@ const {User} = require('../db/models');
 
 router.post('/signin', (request, response, next) => {
     let { username, password } = request.body;
-    User.findOne({where : {username: username}})
-    .then(userData => {
+    User.findOne({where : {username: username}}).then(userData => {
         if(userData) {
             User.findOne({where : {username: username, password: password}})
             .then(fullData => {
