@@ -100,11 +100,14 @@ router.get('/key', (request, response, next) => {
     response.status(200).json(booksKey.booksKey)
 })
 
+//get books posted by user with provided id
 router.get('/:id', (request, response, next) => {
-    Book.findByPk(request.params.id)
-    .then(book => {
-        response.status(200).send(book)
+    Book.findAll({
+        where: {
+            userId: request.params.id
+        }
     })
+    .then(books => response.status(200).json(books))
     .catch(err => next(err))
 })
 
