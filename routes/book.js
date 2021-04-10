@@ -47,6 +47,10 @@ router.post('/recommended', (request, response, next) => {
             for (let i = 0; i < bookList.length; i++) {
                 if (distanceResponse.data.distance[i + 1] !== undefined) {
                     bookList[i].dataValues.distance = distanceResponse.data.distance[i + 1].toFixed(1);
+                    bookList[i].dataValues.city = distanceResponse.data.locations[i + 1].adminArea5;
+                    bookList[i].dataValues.state = distanceResponse.data.locations[i + 1].adminArea3;
+                    bookList[i].dataValues.zipcode = bookList[i].dataValues.user.dataValues.zipcode;
+                    bookList[i].dataValues.user = bookList[i].dataValues.user.dataValues.username;
                 }
                 else {
                     bookList[i].distance = undefined;
@@ -82,7 +86,10 @@ router.post('/isbn', async (request, response, next) => {
                 for (let i = 0; i < result.length; i++) {
                     if (distanceResponse.data.distance[i + 1] !== undefined) {
                         result[i].dataValues.distance = distanceResponse.data.distance[i + 1].toFixed(1);
-                    }
+                        result[i].dataValues.city = distanceResponse.data.locations[i + 1].adminArea5;
+                        result[i].dataValues.state = distanceResponse.data.locations[i + 1].adminArea3;
+                        result[i].dataValues.zipcode = result[i].dataValues.user.dataValues.zipcode;
+                        result[i].dataValues.user = result[i].dataValues.user.dataValues.username;                    }
                     else {
                         result[i].distance = undefined;
                     }
