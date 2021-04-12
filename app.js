@@ -11,10 +11,15 @@ const PORT = 3500;
 const syncDB = async() => {
     try {
         await db.sync({force: false});
+        //UNCOMMENT ONCE IF RESET
+        /*
+        await db.sync({force: true});
+        await seedDatabase();
+        */
     } catch (error) {
         if (error.name == 'SequelizeConnectionError') {
-            await makeDatabase();
-            await db.sync({forse: true});
+            //await makeDatabase();
+            await db.sync({force: true});
             await seedDatabase();
         }
         else {
