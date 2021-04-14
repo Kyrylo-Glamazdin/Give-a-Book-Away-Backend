@@ -118,6 +118,37 @@ router.get('/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
+/*
+//get books posted by user with provided id
+router.get('/:id', (request, response, next) => {
+    Book.findAll({
+        where: {
+            userId: request.params.id
+        },
+        include:[{
+            model: User
+        }]
+    })
+    .then(books => {
+        if (books.length > 0){
+        axios.get("http://www.mapquestapi.com/geocoding/v1/address?key=" + distanceKey + "&location=" + books[0].dataValues.user.dataValues.zipcode)
+        .then(distanceResponse => {
+            for (let i = 0; i < books.length; i++) {
+                books[i].dataValues.distance = "0.0";
+                books[i].dataValues.city = distanceResponse.data.results[0].locations[0].adminArea5;
+                books[i].dataValues.state = distanceResponse.data.results[0].locations[0].adminArea3;
+                books[i].dataValues.zipcode = books[i].dataValues.user.dataValues.zipcode;
+                books[i].dataValues.user = books[i].dataValues.user.dataValues.username;  
+            }
+            response.status(200).json(books)
+        })}
+    else {
+        response.status(200).json(books)
+    }})
+    .catch(err => next(err))
+})
+*/
+
 router.post('/post', async (request, response, next) => {
     let newBook = request.body.book
     let associatedUser = request.body.user
