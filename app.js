@@ -9,18 +9,30 @@ const seedDatabase = require('./functions/seedDatabase');
 
 const http = require('http');
 const server = http.createServer(app);
-const io = require('socket.io')(server, {
+const io = (socketIo)(server, {
     cors: {
       origin: '*',
     }
   });
 
 const cors = require('cors');
+const formatMessage = require('./functions/messages')
 
 const PORT = 3500;
 
+
 io.on('connection', socket => {
-    console.log("New connection")
+    socket.on('joinRoom', (chatId) => {
+        socket.join(chatId);
+    })
+
+    socket.on('leaveRoom', (chatId) => {
+        socket.leave(chatId)
+    })
+
+    socket.on('chatMessage', (messageObject) => {
+        io.to(messageObject.chatId).emit('message', formatMessage(messageObject.username, messageObject.lineText))
+    })
 })
 
 const syncDB = async() => {
@@ -33,7 +45,7 @@ const syncDB = async() => {
         */
     } catch (error) {
         if (error.name == 'SequelizeConnectionError') {
-            //await makeDatabase();
+            await makeDatabase(); //uncomment if using local db
             await db.sync({force: true});
             await seedDatabase();
         }
