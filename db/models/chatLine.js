@@ -5,6 +5,7 @@ const ChatLine = db.define('chatline', {
     id: {
         type: Sequelize.BIGINT,
         allownull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     chatId: {

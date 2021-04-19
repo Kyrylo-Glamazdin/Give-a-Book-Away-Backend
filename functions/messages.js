@@ -1,10 +1,12 @@
 const moment = require('moment');
 
-function formatMessage(username, line) {
+function formatMessage(id, username, line, conversationId) {
     return {
+        id,
         username,
         line,
-        createdAt: moment().format('LLL')
+        conversationId,
+        time: moment().format('LLL')
     }
 }
 

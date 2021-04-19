@@ -45,7 +45,7 @@ router.post('/chat', (request, response, next) => {
 
 router.post('/chatline', (request, response, next) => {
     const {chatId, userId, lineText, time} = request.body
-    Chat.create({
+    ChatLine.create({
         chatId,
         userId,
         lineText,

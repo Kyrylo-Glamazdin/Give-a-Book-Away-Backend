@@ -31,7 +31,7 @@ io.on('connection', socket => {
     })
 
     socket.on('chatMessage', (messageObject) => {
-        io.to(messageObject.chatId).emit('message', formatMessage(messageObject.username, messageObject.lineText))
+        io.to(messageObject.conversationId).emit('message', formatMessage(messageObject.id, messageObject.username, messageObject.lineText, messageObject.conversationId))
     })
 })
 
@@ -39,13 +39,13 @@ const syncDB = async() => {
     try {
         await db.sync({force: false});
         //UNCOMMENT ONCE IF RESET
-        /*
-        await db.sync({force: true});
-        await seedDatabase();
-        */
+        
+        // await db.sync({force: true});
+        // await seedDatabase();
+        
     } catch (error) {
         if (error.name == 'SequelizeConnectionError') {
-            await makeDatabase(); //uncomment if using local db
+            // await makeDatabase(); //uncomment if using local db
             await db.sync({force: true});
             await seedDatabase();
         }
