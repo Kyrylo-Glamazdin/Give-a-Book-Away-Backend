@@ -97,7 +97,22 @@ router.post('/isbn', async (request, response, next) => {
                         result[i].distance = undefined;
                     }
                 }
-                response.status(200).json(result)
+                Book.findAll({
+                    where: {
+                        title: {
+                            [Op.like]: `%${request.body.formValue}%`
+                        },
+                        userId: {[Op.not]: request.body.id}
+                    },
+                    include:[{
+                        model: User
+                    }]
+                })
+                .then(similarBooks => {
+                    response.status(200).json({ result, similarBooks })
+                }).catch(err => {
+                    response.status(200).json({ result, similarBooks: [] })
+                })
             })
         }
         else {
