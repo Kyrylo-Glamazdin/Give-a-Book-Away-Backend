@@ -22,30 +22,46 @@ const PORT = 3500;
 
 
 io.on('connection', socket => {
+    console.log('connect')
     socket.on('joinRoom', (chatId) => {
+        console.log('user joined ' + chatId)
         socket.join(chatId);
     })
 
     socket.on('leaveRoom', (chatId) => {
+        console.log('user left ' + chatId)
+        // socket.leaveAll()
         socket.leave(chatId)
     })
 
-    socket.on('chatMessage', (messageObject) => {
-        io.to(messageObject.chatId).emit('message', formatMessage(messageObject.username, messageObject.lineText))
+    // socket.on('chatMessage', (messageObject) => {
+    //     io.to(messageObject.conversationId).emit('message', formatMessage(messageObject.id, messageObject.username, messageObject.lineText, messageObject.conversationId))
+    // })
+
+    socket.on('iconUpdate', (messageObject) => {
+        let formattedMessage = formatMessage(messageObject.id, messageObject.username, messageObject.lineText, messageObject.conversationId, messageObject.otherUserId)
+        console.log('received')
+        socket.broadcast.emit('updateRequired', formattedMessage)
+        io.to(messageObject.conversationId).emit('message', formattedMessage)
     })
+})
+
+io.on('disconnect', socket => {
+    console.log('disconnect')
+    socket.leave(chatId)
 })
 
 const syncDB = async() => {
     try {
         await db.sync({force: false});
         //UNCOMMENT ONCE IF RESET
-        /*
-        await db.sync({force: true});
-        await seedDatabase();
-        */
+        
+        // await db.sync({force: true});
+        // await seedDatabase();
+        
     } catch (error) {
         if (error.name == 'SequelizeConnectionError') {
-            await makeDatabase(); //uncomment if using local db
+            // await makeDatabase(); //uncomment if using local db
             await db.sync({force: true});
             await seedDatabase();
         }
