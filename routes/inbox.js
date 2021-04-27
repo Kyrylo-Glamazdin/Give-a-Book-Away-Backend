@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {Chat, ChatLine, User} = require('../db/models');
+const {Chat, ChatLine} = require('../db/models');
 const {Op} = require('sequelize');
 
 //get all chats where id is the logged in user
@@ -19,17 +19,48 @@ router.get('/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
+router.post('/findchat', (request, response, next) => {
+    let conversationId = request.body
+    Chat.findByPk(conversationId)
+    .then(chats => response.status(200).json(chats))
+    .catch(err => next(err))
+})
+
+//params.id is chat id
 router.get('/chatlines/:id', (request, response, next) => {
     let chatId = request.params.id
     ChatLine.findAll({
         where: {
-            chatId
+            chatId: chatId
         },
         order: [
             ['createdAt', 'ASC']
         ]
     })
     .then(chatLines => response.status(200).json(chatLines))
+    .catch(err => next(err))
+})
+
+//params.id is chat id
+router.get('/chaticonline/:id', (request, response, next) => {
+    let chatId = request.params.id
+    ChatLine.max('id', {
+        where: {
+            chatId: chatId
+        },
+    })
+    .then(chatLine => {
+        response.status(200).json(chatLine)
+    })
+    .catch(err => next(err))
+})
+
+router.get('/chaticonlatest/:id', (request, response, next) => {
+    let lineId = request.params.id
+    ChatLine.findByPk(lineId)
+    .then(chatLine => {
+        response.status(200).json(chatLine)
+    })
     .catch(err => next(err))
 })
 

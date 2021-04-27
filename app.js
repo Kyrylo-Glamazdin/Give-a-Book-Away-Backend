@@ -22,17 +22,33 @@ const PORT = 3500;
 
 
 io.on('connection', socket => {
+    console.log('connect')
     socket.on('joinRoom', (chatId) => {
+        console.log('user joined ' + chatId)
         socket.join(chatId);
     })
 
     socket.on('leaveRoom', (chatId) => {
+        console.log('user left ' + chatId)
+        // socket.leaveAll()
         socket.leave(chatId)
     })
 
-    socket.on('chatMessage', (messageObject) => {
-        io.to(messageObject.conversationId).emit('message', formatMessage(messageObject.id, messageObject.username, messageObject.lineText, messageObject.conversationId))
+    // socket.on('chatMessage', (messageObject) => {
+    //     io.to(messageObject.conversationId).emit('message', formatMessage(messageObject.id, messageObject.username, messageObject.lineText, messageObject.conversationId))
+    // })
+
+    socket.on('iconUpdate', (messageObject) => {
+        let formattedMessage = formatMessage(messageObject.id, messageObject.username, messageObject.lineText, messageObject.conversationId, messageObject.otherUserId)
+        console.log('received')
+        socket.broadcast.emit('updateRequired', formattedMessage)
+        io.to(messageObject.conversationId).emit('message', formattedMessage)
     })
+})
+
+io.on('disconnect', socket => {
+    console.log('disconnect')
+    socket.leave(chatId)
 })
 
 const syncDB = async() => {
