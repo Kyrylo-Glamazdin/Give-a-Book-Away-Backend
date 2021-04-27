@@ -20,7 +20,7 @@ router.get('/:id', (request, response, next) => {
 })
 
 router.post('/findchat', (request, response, next) => {
-    let conversationId = request.body
+    let conversationId = request.body.conversationId
     Chat.findByPk(conversationId)
     .then(chats => response.status(200).json(chats))
     .catch(err => next(err))
