@@ -19,6 +19,31 @@ router.get('/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
+router.post('/findchatbytwousers', (request, response, next) => {
+    let userOneId = request.body.userOneId
+    let userTwoId = request.body.userTwoId
+    Chat.findOne({
+        where: {
+            [Op.or]: [{
+                userOneId,
+                userTwoId
+            }, {
+                userOneId: userTwoId,
+                userTwoId: userOneId
+            }]
+        }
+    })
+    .then(chat => {
+        if (chat) {
+            response.status(200).json(chat)
+        }
+        else {
+            response.status(200).send(null)
+        }
+    })
+    .catch(err => next(err))
+})
+
 router.post('/findchat', (request, response, next) => {
     let conversationId = request.body.conversationId
     Chat.findByPk(conversationId)
