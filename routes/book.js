@@ -204,6 +204,7 @@ router.post("/post", async (request, response, next) => {
     isbn: newBook.isbn,
     preview_image: newBook.preview_image,
     userId: associatedUser.id,
+    condition: newBook.condition,
   })
     .then((book) => response.status(200).json(book))
     .catch((err) => next(err));
