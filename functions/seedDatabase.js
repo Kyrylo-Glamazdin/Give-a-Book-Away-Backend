@@ -32,154 +32,154 @@ const seedDatabase = async() => {
 
     const books = await Promise.all([
         Book.create({
-            title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", condition: "New", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn: "9789390287154", preview_image: "http://books.google.com/books/content?id=zWvuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn: "9789390287154", condition: "New", preview_image: "http://books.google.com/books/content?id=zWvuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", condition: "New", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", condition: "Old", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Book Thief", author: "Markus Zusak", isbn: "9781473541870", preview_image: "http://books.google.com/books/content?id=FNF1CwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Book Thief", author: "Markus Zusak", isbn: "9781473541870", condition: "New", preview_image: "http://books.google.com/books/content?id=FNF1CwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "Crime and Punishment", author: "Fyodor Dostoevsky", isbn: "9781473382886", preview_image: "http://books.google.com/books/content?id=bBl5CgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Crime and Punishment", author: "Fyodor Dostoevsky", isbn: "9781473382886", condition: "New", preview_image: "http://books.google.com/books/content?id=bBl5CgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Lord of the Rings", author: "J.R.R. Tolkien", isbn: "9780547951942", preview_image: "http://books.google.com/books/content?id=yl4dILkcqm4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Lord of the Rings", author: "J.R.R. Tolkien", isbn: "9780547951942", condition: "Old", preview_image: "http://books.google.com/books/content?id=yl4dILkcqm4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Catcher in the Rye", author: "J. D. Salinger", isbn: "0848832914", preview_image: "http://books.google.com/books/content?id=Bb91ngEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Catcher in the Rye", author: "J. D. Salinger", isbn: "0848832914", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=Bb91ngEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "Don Quixote", author: "Miguel de Cervantes Saavedra", isbn: "1853267953", preview_image: "http://books.google.com/books/content?id=FICLzcp22b8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Don Quixote", author: "Miguel de Cervantes Saavedra", isbn: "1853267953", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=FICLzcp22b8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "To Kill a Mockingbird", author: "Harper Lee", isbn: "9780062368683", preview_image: "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "To Kill a Mockingbird", author: "Harper Lee", isbn: "9780062368683", condition: "Old", preview_image: "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Complete Chronicles of Narnia", author: "C. S. Lewis", isbn: "0007241348", preview_image: "http://books.google.com/books/content?id=2Z0eNAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Complete Chronicles of Narnia", author: "C. S. Lewis", isbn: "0007241348", condition: "New", preview_image: "http://books.google.com/books/content?id=2Z0eNAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "1984", author: "George Orwell", isbn: "9780547249643", preview_image: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "1984", author: "George Orwell", isbn: "9780547249643", condition: "Old", preview_image: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Nick", author: "Michael Farris Smith", isbn: "9780316529754", preview_image: "http://books.google.com/books/content?id=R2DhDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "Nick", author: "Michael Farris Smith", isbn: "9780316529754", condition: "New", preview_image: "http://books.google.com/books/content?id=R2DhDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn: "9789898559425", preview_image: "http://books.google.com/books/content?id=9cFdAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn: "9789898559425", condition: "New", preview_image: "http://books.google.com/books/content?id=9cFdAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Hobbit", author: "J.R.R. Tolkien", isbn: "9780544115552", preview_image: "http://books.google.com/books/content?id=OlCHcjX0RT4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Hobbit", author: "J.R.R. Tolkien", isbn: "9780544115552", condition: "Old", preview_image: "http://books.google.com/books/content?id=OlCHcjX0RT4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "One Hundred Years of Solitude", author: "Gabriel Garcia Marquez", isbn: "9780060531041", preview_image: "http://books.google.com/books/content?id=pgPWOaOctq8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "One Hundred Years of Solitude", author: "Gabriel Garcia Marquez", isbn: "9780060531041", condition: "Old", preview_image: "http://books.google.com/books/content?id=pgPWOaOctq8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "War and Peace", author: "Leo Tolstoy", isbn: "1904633854", preview_image: "http://books.google.com/books/content?id=s-OQ2yHDIMQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "War and Peace", author: "Leo Tolstoy", isbn: "1904633854", condition: "Old", preview_image: "http://books.google.com/books/content?id=s-OQ2yHDIMQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Grapes of Wrath", author: "John Steinbeck", isbn: "0141394889", preview_image: "http://books.google.com/books/content?id=oGUPnwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Grapes of Wrath", author: "John Steinbeck", isbn: "0141394889", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=oGUPnwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "The Adventures of Huckleberry Finn Illustrated", author: "Mark Twain", isbn: "9798707733857", preview_image: "http://books.google.com/books/content?id=_fE3zgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Adventures of Huckleberry Finn Illustrated", author: "Mark Twain", isbn: "9798707733857", condition: "Old", preview_image: "http://books.google.com/books/content?id=_fE3zgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "Cat's Cradle", author: "Kurt Vonnegut", isbn: "9780307567277", preview_image: "http://books.google.com/books/content?id=w25sx0G6nRsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Cat's Cradle", author: "Kurt Vonnegut", isbn: "9780307567277", condition: "New", preview_image: "http://books.google.com/books/content?id=w25sx0G6nRsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Cat's Cradle", author: "Kurt Vonnegut", isbn: "9780307567277", preview_image: "http://books.google.com/books/content?id=w25sx0G6nRsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Cat's Cradle", author: "Kurt Vonnegut", isbn: "9780307567277", condition: "New", preview_image: "http://books.google.com/books/content?id=w25sx0G6nRsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Cat's Cradle", author: "Kurt Vonnegut", isbn: "9780307567277", preview_image: "http://books.google.com/books/content?id=w25sx0G6nRsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Cat's Cradle", author: "Kurt Vonnegut", isbn: "9780307567277", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=w25sx0G6nRsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Anna Karenina", author: "Leo Tolstoy", isbn: "9780198748847", preview_image: "http://books.google.com/books/content?id=1DooDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Anna Karenina", author: "Leo Tolstoy", isbn: "9780198748847", condition: "New", preview_image: "http://books.google.com/books/content?id=1DooDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Anna Karenina", author: "Leo Tolstoy", isbn: "9780198748847", preview_image: "http://books.google.com/books/content?id=1DooDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Anna Karenina", author: "Leo Tolstoy", isbn: "9780198748847", condition: "New", preview_image: "http://books.google.com/books/content?id=1DooDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Invisible Man", author: "H.G. Wells", isbn: "9781473216846", preview_image: "http://books.google.com/books/content?id=-xyzCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Invisible Man", author: "H.G. Wells", isbn: "9781473216846", condition: "New", preview_image: "http://books.google.com/books/content?id=-xyzCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Book Thief", author: "Markus Zusak", isbn: "9781473541870", preview_image: "http://books.google.com/books/content?id=FNF1CwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Book Thief", author: "Markus Zusak", isbn: "9781473541870", condition: "New", preview_image: "http://books.google.com/books/content?id=FNF1CwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "The Book Thief", author: "Markus Zusak", isbn: "9781473541870", preview_image: "http://books.google.com/books/content?id=FNF1CwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Book Thief", author: "Markus Zusak", isbn: "9781473541870", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=FNF1CwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "Frankenstein", author: "Mary Wollstonecraft Shelley", isbn: "9780262533287", preview_image: "http://books.google.com/books/content?id=GlT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Frankenstein", author: "Mary Wollstonecraft Shelley", isbn: "9780262533287", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=GlT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Frankenstein", author: "Mary Wollstonecraft Shelley", isbn: "9780262533287", preview_image: "http://books.google.com/books/content?id=GlT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Frankenstein", author: "Mary Wollstonecraft Shelley", isbn: "9780262533287", condition: "Old", preview_image: "http://books.google.com/books/content?id=GlT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Animal Farm", author: "George Orwell", isbn: "9780358093152", preview_image: "http://books.google.com/books/content?id=aWypDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Animal Farm", author: "George Orwell", isbn: "9780358093152", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=aWypDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Animal Farm", author: "George Orwell", isbn: "9780358093152", preview_image: "http://books.google.com/books/content?id=aWypDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Animal Farm", author: "George Orwell", isbn: "9780358093152", condition: "New", preview_image: "http://books.google.com/books/content?id=aWypDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Animal Farm", author: "George Orwell", isbn: "9780358093152", preview_image: "http://books.google.com/books/content?id=aWypDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Animal Farm", author: "George Orwell", isbn: "9780358093152", condition: "New", preview_image: "http://books.google.com/books/content?id=aWypDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Harry Potter and the Chamber of Secrets", author: "J.K. Rowling", isbn: "9781781100509", preview_image: "http://books.google.com/books/content?id=5iTebBW-w7QC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Harry Potter and the Chamber of Secrets", author: "J.K. Rowling", isbn: "9781781100509", condition: "New", preview_image: "http://books.google.com/books/content?id=5iTebBW-w7QC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Selfish Gene", author: "Richard Dawkins", isbn: "9780191093067", preview_image: "http://books.google.com/books/content?id=WZ9HDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Selfish Gene", author: "Richard Dawkins", isbn: "9780191093067", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=WZ9HDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Selfish Gene", author: "Richard Dawkins", isbn: "9780191093067", preview_image: "http://books.google.com/books/content?id=WZ9HDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Selfish Gene", author: "Richard Dawkins", isbn: "9780191093067", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=WZ9HDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", condition: "New", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", condition: "Old", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", condition: "New", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Cosmos", author: "Carl Sagan", isbn: "9780345539434", condition: "New", preview_image: "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "A Briefer History of Time", author: "Stephen Hawking", isbn: "9780553804362", preview_image: "http://books.google.com/books/content?id=jNmJDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "A Briefer History of Time", author: "Stephen Hawking", isbn: "9780553804362", condition: "New", preview_image: "http://books.google.com/books/content?id=jNmJDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Wonderful Life: The Burgess Shale and the Nature of History", author: "Stephen Jay Gould", isbn: "9780393245202", preview_image: "http://books.google.com/books/content?id=q8BUAgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Wonderful Life: The Burgess Shale and the Nature of History", author: "Stephen Jay Gould", isbn: "9780393245202", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=q8BUAgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Swift 5 for Absolute Beginners", author: "Stefan Kaczmarek", isbn: "9781484248683", preview_image: "http://books.google.com/books/content?id=FUefDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Swift 5 for Absolute Beginners", author: "Stefan Kaczmarek", isbn: "9781484248683", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=FUefDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "C Programming Language", author: "Brian W. Kernighan", isbn: "9780133086218", preview_image: "http://books.google.com/books/content?id=Yi5FI5QcdmYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "C Programming Language", author: "Brian W. Kernighan", isbn: "9780133086218", condition: "New", preview_image: "http://books.google.com/books/content?id=Yi5FI5QcdmYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Clean Code", author: "Robert C. Martin", isbn: "9780136083252", preview_image: "http://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Clean Code", author: "Robert C. Martin", isbn: "9780136083252", condition: "New", preview_image: "http://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Clean Code", author: "Robert C. Martin", isbn: "9780136083252", preview_image: "http://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Clean Code", author: "Robert C. Martin", isbn: "9780136083252", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Economics Book", author: "DK", isbn: "9780241199336", preview_image: "http://books.google.com/books/content?id=joTYBQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Economics Book", author: "DK", isbn: "9780241199336", condition: "Old", preview_image: "http://books.google.com/books/content?id=joTYBQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
-            title: "The Greatest Show on Earth", author: "Richard Dawkins", isbn: "9781416594789", preview_image: "http://books.google.com/books/content?id=U8AFxmc76rcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Greatest Show on Earth", author: "Richard Dawkins", isbn: "9781416594789", condition: "Old", preview_image: "http://books.google.com/books/content?id=U8AFxmc76rcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Wuthering Heights", author: "Emily Brontë", isbn: "9781438114880", preview_image: "http://books.google.com/books/content?id=fN0gOdKQZD4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Wuthering Heights", author: "Emily Brontë", isbn: "9781438114880", condition: "Old", preview_image: "http://books.google.com/books/content?id=fN0gOdKQZD4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Iliad", author: "Homer", isbn: "0472116177", preview_image: "http://books.google.com/books/content?id=sos0paw_-cEC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "The Iliad", author: "Homer", isbn: "0472116177", condition: "New", preview_image: "http://books.google.com/books/content?id=sos0paw_-cEC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         })
     ])
 
