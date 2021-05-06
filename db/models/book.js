@@ -26,7 +26,10 @@ const Book = db.define(
       type: Sequelize.STRING,
       allownull: false,
     },
-
+    description: {
+      type: Sequelize.STRING,
+      allownull: false,
+    },
     preview_image: {
       type: Sequelize.TEXT,
       allownull: true,

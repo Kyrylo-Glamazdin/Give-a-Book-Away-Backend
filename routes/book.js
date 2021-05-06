@@ -205,6 +205,7 @@ router.post("/post", async (request, response, next) => {
     preview_image: newBook.preview_image,
     userId: associatedUser.id,
     condition: newBook.condition,
+    description: newBook.description,
   })
     .then((book) => response.status(200).json(book))
     .catch((err) => next(err));
@@ -216,7 +217,7 @@ router.put("/:id", (request, response, next) => {
       id: request.params.id,
     },
   })
-    .then(() => response.status(200))
+    .then(() => response.status(200).json(true))
     .catch((err) => next(err));
 });
 
