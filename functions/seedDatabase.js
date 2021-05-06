@@ -38,10 +38,10 @@ const seedDatabase = async() => {
             title: "The Great Gatsby", author: "F. Scott Fitzgerald", isbn: "9789390287154", condition: "New", preview_image: "http://books.google.com/books/content?id=zWvuDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", condition: "New", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Hamlet, Prince of Denmark", author: "William Shakespeare", isbn: "9781139835268", condition: "New", preview_image: "http://books.google.com/books/content?id=acA2AAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "Hamlet", author: "William Shakespeare", isbn: "1555763332", condition: "Old", preview_image: "http://books.google.com/books/content?id=GxTWsfd82SwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "Hamlet, Prince of Denmark", author: "William Shakespeare", isbn: "9781139835268", condition: "Old", preview_image: "http://books.google.com/books/content?id=acA2AAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
             title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
@@ -65,7 +65,7 @@ const seedDatabase = async() => {
             title: "To Kill a Mockingbird", author: "Harper Lee", isbn: "9780062368683", condition: "Old", preview_image: "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "The Complete Chronicles of Narnia", author: "C. S. Lewis", isbn: "0007241348", condition: "New", preview_image: "http://books.google.com/books/content?id=2Z0eNAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            title: "The Brain That Changes Itself", author: "Norman Doidge", isbn: "9781101147115", condition: "New", preview_image: "http://books.google.com/books/content?id=Qw7qj5nXSPUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
             title: "1984", author: "George Orwell", isbn: "9780547249643", condition: "Old", preview_image: "http://books.google.com/books/content?id=kotPYEqx7kMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
@@ -83,7 +83,7 @@ const seedDatabase = async() => {
             title: "One Hundred Years of Solitude", author: "Gabriel Garcia Marquez", isbn: "9780060531041", condition: "Old", preview_image: "http://books.google.com/books/content?id=pgPWOaOctq8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         }),
         Book.create({
-            title: "War and Peace", author: "Leo Tolstoy", isbn: "1904633854", condition: "Old", preview_image: "http://books.google.com/books/content?id=s-OQ2yHDIMQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            title: "War and Peace", author: "graf Leo Tolstoy", isbn: "0451523261", condition: "Old", preview_image: "http://books.google.com/books/content?id=2goK4HJO2VkC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         }),
         Book.create({
             title: "The Grapes of Wrath", author: "John Steinbeck", isbn: "0141394889", condition: "Slightly Used", preview_image: "http://books.google.com/books/content?id=oGUPnwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
