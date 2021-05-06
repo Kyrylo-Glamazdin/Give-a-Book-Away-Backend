@@ -91,6 +91,10 @@ router.post("/isbn", async (request, response, next) => {
       },
     ],
   }).then((result) => {
+    if (result.length === 0) {
+      response.status(200).json([]);
+      return;
+    }
     for (let i = 0; i < result.length; i++) {
       zipCodeArray.push(result[i].user.zipcode);
     }
@@ -122,31 +126,88 @@ router.post("/isbn", async (request, response, next) => {
               result[i].distance = undefined;
             }
           }
-          Book.findAll({
-            where: {
-              title: {
-                [Op.like]: `%${request.body.formValue}%`,
-              },
-              userId: { [Op.not]: request.body.id },
-            },
-            include: [
-              {
-                model: User,
-              },
-            ],
-          })
-            .then((similarBooks) => {
-              response.status(200).json({ result, similarBooks });
+        })
+            .then(() => {
+              response.status(200).json(result);
             })
             .catch((err) => {
-              response.status(200).json({ result, similarBooks: [] });
+              next(err);
             });
-        });
+    }
+  });
+});
+
+
+router.post("/similar", async (request, response, next) => {
+  let userZipcode = request.body.zipcode;
+  let booksArray = request.body.books;
+  let zipCodeArray = [userZipcode];
+  Book.findAll({
+    where: {
+      [Op.or]: [{
+          isbn: booksArray[0].isbn,
+          userId: { [Op.not]: request.body.id },
+      }, {
+          isbn: booksArray[1].isbn,
+          userId: { [Op.not]: request.body.id },
+      }, {
+          isbn: booksArray[2].isbn,
+          userId: { [Op.not]: request.body.id },
+    }, {
+          isbn: booksArray[3].isbn,
+          userId: { [Op.not]: request.body.id },
+      }]},
+    include: [
+      {
+        model: User,
+      },
+    ],
+  }).then((result) => {
+    for (let i = 0; i < result.length; i++) {
+      zipCodeArray.push(result[i].user.zipcode);
+    }
+    const zipCodeObject = { locations: zipCodeArray };
+    if (zipCodeObject.locations.length > 1) {
+      axios
+        .post(
+          "http://www.mapquestapi.com/directions/v2/routematrix?key=" +
+            distanceKey,
+          zipCodeObject
+        )
+        .then((distanceResponse) => {
+          for (let i = 0; i < result.length; i++) {
+            if (distanceResponse.data.distance[i + 1] !== undefined) {
+              result[i].dataValues.distance = distanceResponse.data.distance[
+                i + 1
+              ].toFixed(1);
+              result[i].dataValues.city =
+                distanceResponse.data.locations[i + 1].adminArea5;
+              result[i].dataValues.state =
+                distanceResponse.data.locations[i + 1].adminArea3;
+              result[i].dataValues.zipcode =
+                result[i].dataValues.user.dataValues.zipcode;
+              result[i].dataValues.username =
+                result[i].dataValues.user.dataValues.username;
+              result[i].dataValues.userOwnerId =
+                result[i].dataValues.user.dataValues.id;
+            } else {
+              result[i].distance = undefined;
+            }
+          }})
+            .then(() => {
+              response.status(200).json(result);
+            })
+            .catch((err) => {
+              next(err)
+            });
     } else {
       response.status(200).json([]);
     }
   });
 });
+
+
+
 
 router.get("/key", (request, response, next) => {
   response.status(200).json(booksKey.booksKey);
