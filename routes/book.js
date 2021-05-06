@@ -238,21 +238,26 @@ router.post("/userbooks/", (request, response, next) => {
     where: {
       userId: request.body.userId,
     },
+    include: [
+      {
+        model: User,
+      },
+    ],
   })
-    .then((books) => {
-      axios
-        .post(
-          "http://www.mapquestapi.com/directions/v2/routematrix?key=" +
-            distanceKey,
-          zipCodeObject
-        )
+    .then((books) => {axios.post("http://www.mapquestapi.com/directions/v2/routematrix?key=" +distanceKey, zipCodeObject)
         .then((distanceResponse) => {
           for (let i = 0; i < books.length; i++) {
-            books[
-              i
-            ].dataValues.distance = distanceResponse.data.distance[1].toFixed(
-              1
-            );
+            books[i].dataValues.distance = distanceResponse.data.distance[1].toFixed(1);
+            books[i].dataValues.city =
+                distanceResponse.data.locations[1].adminArea5;
+                books[i].dataValues.state =
+                distanceResponse.data.locations[1].adminArea3;
+                books[i].dataValues.zipcode =
+                books[i].dataValues.user.dataValues.zipcode;
+                books[i].dataValues.username =
+                books[i].dataValues.user.dataValues.username;
+                books[i].dataValues.userOwnerId =
+                books[i].dataValues.user.dataValues.id;
           }
           response.status(200).json(books);
         });
