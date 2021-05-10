@@ -24,7 +24,7 @@ router.post('/signin', (request, response, next) => {
             })
             .catch(err => next(err));
         } else {
-            return response.status(200).json({ status: false, message: "This user not exist." });
+            return response.status(200).json({ status: false, message: "This user does not exist." });
         }
     })
     .catch(err => next(err));
@@ -34,7 +34,7 @@ router.post('/signup', async (request, response, next) => {
     User.findOne({where : {username: request.body.userName}})
     .then(async userData => {
         if(userData) {
-            response.status(200).json({ status: true, message: "This username is already taken"});
+            response.status(200).json({ status: false, message: "This username is already taken"});
         }
         else {
             let hashedPassword = hash(request.body.password, salt)
