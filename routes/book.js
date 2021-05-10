@@ -126,6 +126,7 @@ router.post("/isbn", async (request, response, next) => {
               result[i].distance = undefined;
             }
           }
+          result.sort((a, b) => (a.dataValues.distance > b.dataValues.distance ? 1 : -1))
         })
             .then(() => {
               response.status(200).json(result);
@@ -142,6 +143,9 @@ router.post("/similar", async (request, response, next) => {
   let userZipcode = request.body.zipcode;
   let booksArray = request.body.books;
   let zipCodeArray = [userZipcode];
+  if (booksArray.length < 4) {
+    return;
+  }
   Book.findAll({
     where: {
       [Op.or]: [{
@@ -193,7 +197,9 @@ router.post("/similar", async (request, response, next) => {
             } else {
               result[i].distance = undefined;
             }
-          }})
+          }
+          result.sort((a, b) => (a.dataValues.distance > b.dataValues.distance ? 1 : -1))
+        })
             .then(() => {
               response.status(200).json(result);
             })
