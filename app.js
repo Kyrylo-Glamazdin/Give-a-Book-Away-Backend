@@ -55,7 +55,7 @@ const syncDB = async () => {
     // await seedDatabase();
   } catch (error) {
     if (error.name == "SequelizeConnectionError") {
-      await makeDatabase(); //uncomment if using local db
+      // await makeDatabase(); //uncomment if using local db
       await db.sync({ force: true });
       await seedDatabase();
     } else {
