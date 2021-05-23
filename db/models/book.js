@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
+//book object
 const Book = db.define(
   "book",
   {
@@ -22,7 +23,6 @@ const Book = db.define(
       allownull: false,
     },
     condition: {
-      /**ADDED */ /////////////////////////
       type: Sequelize.STRING,
       allownull: false,
     },

@@ -23,59 +23,50 @@ router.post("/recommended", (request, response, next) => {
       },
     ],
   })
-    .then((bookList) => {
-      if (bookList.length > 12) {
-        let randomBooks = [];
-        let len = 12;
-        let len2 = bookList.length;
-        while (len > 0) {
-          let selectedIndex = getRandomInt(len2);
-          let selectedBook = bookList[selectedIndex];
-          randomBooks.push(selectedBook);
-          let tempBook = bookList[len2 - 1];
-          bookList[len2 - 1] = selectedBook;
-          bookList[selectedIndex] = tempBook;
-          len--;
-          len2--;
-        }
-        bookList = randomBooks;
+  .then((bookList) => {
+    //select 12 random books
+    if (bookList.length > 12) {
+      let randomBooks = [];
+      let len = 12;
+      let len2 = bookList.length;
+      while (len > 0) {
+        let selectedIndex = getRandomInt(len2);
+        let selectedBook = bookList[selectedIndex];
+        randomBooks.push(selectedBook);
+        let tempBook = bookList[len2 - 1];
+        bookList[len2 - 1] = selectedBook;
+        bookList[selectedIndex] = tempBook;
+        len--;
+        len2--;
       }
+      bookList = randomBooks;
+    }
+    for (let i = 0; i < bookList.length; i++) {
+      zipCodeArray.push(bookList[i].user.zipcode);
+    }
+    //get location data about each book
+    const zipCodeObject = { locations: zipCodeArray };
+    axios.post("http://www.mapquestapi.com/directions/v2/routematrix?key=" + distanceKey, zipCodeObject)
+    .then((distanceResponse) => {
       for (let i = 0; i < bookList.length; i++) {
-        zipCodeArray.push(bookList[i].user.zipcode);
-      }
-      const zipCodeObject = { locations: zipCodeArray };
-      axios
-        .post(
-          "http://www.mapquestapi.com/directions/v2/routematrix?key=" +
-            distanceKey,
-          zipCodeObject
-        )
-        .then((distanceResponse) => {
-          for (let i = 0; i < bookList.length; i++) {
-            if (distanceResponse.data.distance[i + 1] !== undefined) {
-              bookList[i].dataValues.distance = distanceResponse.data.distance[
-                i + 1
-              ].toFixed(1);
-              bookList[i].dataValues.city =
-                distanceResponse.data.locations[i + 1].adminArea5;
-              bookList[i].dataValues.state =
-                distanceResponse.data.locations[i + 1].adminArea3;
-              bookList[i].dataValues.zipcode =
-                bookList[i].dataValues.user.dataValues.zipcode;
-              bookList[i].dataValues.username =
-                bookList[i].dataValues.user.dataValues.username;
-              bookList[i].dataValues.userOwnerId =
-                bookList[i].dataValues.user.dataValues.id;
-            } else {
-              bookList[i].distance = undefined;
-            }
+        if (distanceResponse.data.distance[i + 1] !== undefined) {
+          bookList[i].dataValues.distance = distanceResponse.data.distance[i + 1].toFixed(1);
+          bookList[i].dataValues.city = distanceResponse.data.locations[i + 1].adminArea5;
+          bookList[i].dataValues.state = distanceResponse.data.locations[i + 1].adminArea3;
+          bookList[i].dataValues.zipcode = bookList[i].dataValues.user.dataValues.zipcode;
+          bookList[i].dataValues.username = bookList[i].dataValues.user.dataValues.username;
+          bookList[i].dataValues.userOwnerId = bookList[i].dataValues.user.dataValues.id;
+        } else {
+            bookList[i].distance = undefined;
           }
-          response.status(200).json(bookList);
-        });
+        }
+        response.status(200).json(bookList);
+      });
     })
     .catch((err) => next(err));
 });
 
+//find book by its ISBN
 router.post("/isbn", async (request, response, next) => {
   let userZipcode = request.body.zipcode;
   let bookObject = request.body.book;
@@ -99,46 +90,36 @@ router.post("/isbn", async (request, response, next) => {
       zipCodeArray.push(result[i].user.zipcode);
     }
     const zipCodeObject = { locations: zipCodeArray };
+    //get distance & location data for each book
     if (zipCodeObject.locations.length > 1) {
-      axios
-        .post(
-          "http://www.mapquestapi.com/directions/v2/routematrix?key=" +
-            distanceKey,
-          zipCodeObject
-        )
+      axios.post("http://www.mapquestapi.com/directions/v2/routematrix?key=" + distanceKey, zipCodeObject)
         .then((distanceResponse) => {
           for (let i = 0; i < result.length; i++) {
             if (distanceResponse.data.distance[i + 1] !== undefined) {
-              result[i].dataValues.distance = distanceResponse.data.distance[
-                i + 1
-              ].toFixed(1);
-              result[i].dataValues.city =
-                distanceResponse.data.locations[i + 1].adminArea5;
-              result[i].dataValues.state =
-                distanceResponse.data.locations[i + 1].adminArea3;
-              result[i].dataValues.zipcode =
-                result[i].dataValues.user.dataValues.zipcode;
-              result[i].dataValues.username =
-                result[i].dataValues.user.dataValues.username;
-              result[i].dataValues.userOwnerId =
-                result[i].dataValues.user.dataValues.id;
+              result[i].dataValues.distance = distanceResponse.data.distance[i + 1].toFixed(1);
+              result[i].dataValues.city = distanceResponse.data.locations[i + 1].adminArea5;
+              result[i].dataValues.state = distanceResponse.data.locations[i + 1].adminArea3;
+              result[i].dataValues.zipcode = result[i].dataValues.user.dataValues.zipcode;
+              result[i].dataValues.username = result[i].dataValues.user.dataValues.username;
+              result[i].dataValues.userOwnerId = result[i].dataValues.user.dataValues.id;
             } else {
               result[i].distance = undefined;
             }
           }
+          //sort by distance
           result.sort((a, b) => (a.dataValues.distance > b.dataValues.distance ? 1 : -1))
         })
-            .then(() => {
-              response.status(200).json(result);
-            })
-            .catch((err) => {
-              next(err);
-            });
+        .then(() => {
+          response.status(200).json(result);
+        })
+        .catch((err) => {
+          next(err);
+        });
     }
   });
 });
 
-
+//get similar books (works the same way as getting books by ISBN)
 router.post("/similar", async (request, response, next) => {
   let userZipcode = request.body.zipcode;
   let booksArray = request.body.books;
@@ -171,50 +152,38 @@ router.post("/similar", async (request, response, next) => {
       zipCodeArray.push(result[i].user.zipcode);
     }
     const zipCodeObject = { locations: zipCodeArray };
+    //get distance & location data for each book
     if (zipCodeObject.locations.length > 1) {
-      axios
-        .post(
-          "http://www.mapquestapi.com/directions/v2/routematrix?key=" +
-            distanceKey,
-          zipCodeObject
-        )
+      axios.post("http://www.mapquestapi.com/directions/v2/routematrix?key=" + distanceKey, zipCodeObject)
         .then((distanceResponse) => {
           for (let i = 0; i < result.length; i++) {
             if (distanceResponse.data.distance[i + 1] !== undefined) {
-              result[i].dataValues.distance = distanceResponse.data.distance[
-                i + 1
-              ].toFixed(1);
-              result[i].dataValues.city =
-                distanceResponse.data.locations[i + 1].adminArea5;
-              result[i].dataValues.state =
-                distanceResponse.data.locations[i + 1].adminArea3;
-              result[i].dataValues.zipcode =
-                result[i].dataValues.user.dataValues.zipcode;
-              result[i].dataValues.username =
-                result[i].dataValues.user.dataValues.username;
-              result[i].dataValues.userOwnerId =
-                result[i].dataValues.user.dataValues.id;
+              result[i].dataValues.distance = distanceResponse.data.distance[i + 1].toFixed(1);
+              result[i].dataValues.city = distanceResponse.data.locations[i + 1].adminArea5;
+              result[i].dataValues.state = distanceResponse.data.locations[i + 1].adminArea3;
+              result[i].dataValues.zipcode = result[i].dataValues.user.dataValues.zipcode;
+              result[i].dataValues.username = result[i].dataValues.user.dataValues.username;
+              result[i].dataValues.userOwnerId = result[i].dataValues.user.dataValues.id;
             } else {
               result[i].distance = undefined;
             }
           }
+          //sort by distance
           result.sort((a, b) => (a.dataValues.distance > b.dataValues.distance ? 1 : -1))
         })
-            .then(() => {
-              response.status(200).json(result);
-            })
-            .catch((err) => {
-              next(err)
-            });
+        .then(() => {
+          response.status(200).json(result);
+        })
+        .catch((err) => {
+          next(err)
+        });
     } else {
       response.status(200).json([]);
     }
   });
 });
 
-
-
-
+//return google books api key
 router.get("/key", (request, response, next) => {
   response.status(200).json(booksKey.booksKey);
 });
@@ -230,38 +199,7 @@ router.get("/:id", (request, response, next) => {
     .catch((err) => next(err));
 });
 
-/*
-//get books posted by user with provided id
-router.get('/:id', (request, response, next) => {
-    Book.findAll({
-        where: {
-            userId: request.params.id
-        },
-        include:[{
-            model: User
-        }]
-    })
-    .then(books => {
-        if (books.length > 0){
-        axios.get("http://www.mapquestapi.com/geocoding/v1/address?key=" + distanceKey + "&location=" + books[0].dataValues.user.dataValues.zipcode)
-        .then(distanceResponse => {
-            for (let i = 0; i < books.length; i++) {
-                books[i].dataValues.distance = "0.0";
-                books[i].dataValues.city = distanceResponse.data.results[0].locations[0].adminArea5;
-                books[i].dataValues.state = distanceResponse.data.results[0].locations[0].adminArea3;
-                books[i].dataValues.zipcode = books[i].dataValues.user.dataValues.zipcode;
-                books[i].dataValues.user = books[i].dataValues.user.dataValues.username;  
-                bookList[i].dataValues.userOwnerId = bookList[i].dataValues.user.dataValues.id
-            }
-            response.status(200).json(books)
-        })}
-    else {
-        response.status(200).json(books)
-    }})
-    .catch(err => next(err))
-})
-*/
-
+//post a new book
 router.post("/post", async (request, response, next) => {
   let newBook = request.body.book;
   let associatedUser = request.body.user;
@@ -278,6 +216,7 @@ router.post("/post", async (request, response, next) => {
     .catch((err) => next(err));
 });
 
+//edit a book
 router.put("/:id", (request, response, next) => {
   Book.update(request.body, {
     where: {
@@ -288,15 +227,18 @@ router.put("/:id", (request, response, next) => {
     .catch((err) => next(err));
 });
 
+//delete a book
 router.delete("/:id", (request, response, next) => {
   Book.destroy({
     where: {
       id: request.params.id,
     },
   })
-    .then(() => response.status(200))
-    .catch((err) => next(err));
+  .then(() => response.status(200))
+  .catch((err) => next(err));
 });
+
+//get all books posted by one user
 router.post("/userbooks/", (request, response, next) => {
   let currentUserZipcode = request.body.currentUserZipcode;
   let otherUserZipcode = request.body.otherUserZipcode;
@@ -312,20 +254,17 @@ router.post("/userbooks/", (request, response, next) => {
       },
     ],
   })
-    .then((books) => {axios.post("http://www.mapquestapi.com/directions/v2/routematrix?key=" +distanceKey, zipCodeObject)
+    .then((books) => {
+      //get distance & location data for this user (and all of their books)
+      axios.post("http://www.mapquestapi.com/directions/v2/routematrix?key=" + distanceKey, zipCodeObject)
         .then((distanceResponse) => {
           for (let i = 0; i < books.length; i++) {
             books[i].dataValues.distance = distanceResponse.data.distance[1].toFixed(1);
-            books[i].dataValues.city =
-                distanceResponse.data.locations[1].adminArea5;
-                books[i].dataValues.state =
-                distanceResponse.data.locations[1].adminArea3;
-                books[i].dataValues.zipcode =
-                books[i].dataValues.user.dataValues.zipcode;
-                books[i].dataValues.username =
-                books[i].dataValues.user.dataValues.username;
-                books[i].dataValues.userOwnerId =
-                books[i].dataValues.user.dataValues.id;
+            books[i].dataValues.city = distanceResponse.data.locations[1].adminArea5;
+            books[i].dataValues.state = distanceResponse.data.locations[1].adminArea3;
+            books[i].dataValues.zipcode = books[i].dataValues.user.dataValues.zipcode;
+            books[i].dataValues.username = books[i].dataValues.user.dataValues.username;
+            books[i].dataValues.userOwnerId = books[i].dataValues.user.dataValues.id;
           }
           response.status(200).json(books);
         });

@@ -6,6 +6,7 @@ const bookRouter = require('./book');
 const userRouter = require('./user');
 const chatRouter = require('./inbox')
 
+//combine all routes
 router.use('/auth', authRouter);
 router.use('/book', bookRouter);
 router.use('/user', userRouter);

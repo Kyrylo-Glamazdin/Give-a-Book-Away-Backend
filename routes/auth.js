@@ -6,10 +6,13 @@ const {User} = require('../db/models');
 const { generateSalt, hash, compare} = require('../hash');
 let salt = generateSalt(10)
 
+//sign in
 router.post('/signin', (request, response, next) => {
     let { username, password } = request.body;
+    //find user by username
     User.findOne({where : {username: username}}).then(userData => {
         if(userData) {
+            //check password
             let hashedPassword = {
                 hashedpassword: userData.password,
                 salt: userData.salt
@@ -19,18 +22,22 @@ router.post('/signin', (request, response, next) => {
                 if(fullData) {
                     return response.status(200).json({ status: true, data: userData});
                 } else {
+                    //no authorization if the password is incorrect
                     return response.status(200).json({ status: false, message: "Password is not correct." });
                 }
             })
             .catch(err => next(err));
         } else {
+            //no authorization if username doesn't exist
             return response.status(200).json({ status: false, message: "This user does not exist." });
         }
     })
     .catch(err => next(err));
 })
 
+//create a new user
 router.post('/signup', async (request, response, next) => {
+    //check if such username is already taken. If so, prompt an error message
     User.findOne({where : {username: request.body.userName}})
     .then(async userData => {
         if(userData) {

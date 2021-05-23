@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+//export .env variables
 module.exports = {
   booksKey: process.env.REACT_APP_BOOKS_API_KEY,
   distanceKey: process.env.DISTANCE_MATRIX_API_KEY,

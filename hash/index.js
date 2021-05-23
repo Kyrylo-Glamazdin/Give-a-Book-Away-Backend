@@ -15,6 +15,7 @@ let generateSalt = rounds => {
     return crypto.randomBytes(Math.ceil(rounds / 2)).toString('hex').slice(0, rounds);
 };
 
+//hash user's password
 let hasher = (password, salt) => {
     let hash = crypto.createHmac('sha512', salt);
     hash.update(password);
@@ -35,6 +36,7 @@ let hash = (password, salt) => {
     return hasher(password, salt);
 };
 
+//hash the entered password and compare to the existing one
 let compare = async (password, hash) => {
     if (password == null || hash == null) {
         throw new Error('password and hash is required to compare');

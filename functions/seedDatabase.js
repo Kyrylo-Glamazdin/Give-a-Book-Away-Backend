@@ -5,6 +5,9 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+//A LIST OF INITIAL DATABASE VALUES
+
+//seed users
 const seedDatabase = async() => {
     console.log("Seeding database");
     const users = await Promise.all([
@@ -30,6 +33,7 @@ const seedDatabase = async() => {
 
     console.log("Users seeded");
 
+    //seed books
     const books = await Promise.all([
         Book.create({
             title: "JavaScript: The Good Parts", author: "Douglas Crockford", isbn: "9780596554873", condition: "New", preview_image: "http://books.google.com/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"

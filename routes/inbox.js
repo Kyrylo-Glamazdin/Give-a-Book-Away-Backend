@@ -19,6 +19,7 @@ router.get('/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
+//find a chat by the user ids
 router.post('/findchatbytwousers', (request, response, next) => {
     let userOneId = request.body.userOneId
     let userTwoId = request.body.userTwoId
@@ -44,6 +45,7 @@ router.post('/findchatbytwousers', (request, response, next) => {
     .catch(err => next(err))
 })
 
+//find chat by PK (chat id)
 router.post('/findchat', (request, response, next) => {
     let conversationId = request.body.conversationId
     Chat.findByPk(conversationId)
@@ -51,6 +53,7 @@ router.post('/findchat', (request, response, next) => {
     .catch(err => next(err))
 })
 
+//get all messages in a chat
 //params.id is chat id
 router.get('/chatlines/:id', (request, response, next) => {
     let chatId = request.params.id
@@ -66,6 +69,7 @@ router.get('/chatlines/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
+//get the id of the latest chat message
 //params.id is chat id
 router.get('/chaticonline/:id', (request, response, next) => {
     let chatId = request.params.id
@@ -80,6 +84,7 @@ router.get('/chaticonline/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
+//get the latest message in a chat by message id
 router.get('/chaticonlatest/:id', (request, response, next) => {
     let lineId = request.params.id
     ChatLine.findByPk(lineId)
@@ -89,6 +94,7 @@ router.get('/chaticonlatest/:id', (request, response, next) => {
     .catch(err => next(err))
 })
 
+//create a new chat
 router.post('/chat', (request, response, next) => {
     const {userOneId, userTwoId} = request.body
     Chat.create({
@@ -99,6 +105,7 @@ router.post('/chat', (request, response, next) => {
     .catch(err => next(err))
 })
 
+//save a new message
 router.post('/chatline', (request, response, next) => {
     const {chatId, userId, lineText, time} = request.body
     ChatLine.create({

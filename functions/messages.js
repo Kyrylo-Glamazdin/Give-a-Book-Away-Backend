@@ -1,5 +1,6 @@
 const moment = require('moment');
 
+//format message for socket actions
 function formatMessage(id, username, line, conversationId, otherUserId) {
     return {
         id,

@@ -2,8 +2,13 @@ const Sequelize = require("sequelize");
 const { dbURL } = require("../config");
 const dbName = require("../functions/dbName");
 
+/* USE DATABASE URL FROM .env file */
+
 const db = new Sequelize(dbURL, {logging: false});
-// const db = new Sequelize(dbName, "postgres", "Equbqkxl1738", {
+
+/* USE LOCAL DATABASE  */
+
+// const db = new Sequelize(dbName, "postgres", "DB_PASSWORD", {
 //   dialect: "postgres",
 //   port: 5432,
 //   define: {

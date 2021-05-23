@@ -4,9 +4,11 @@ const db = require("./db");
 const httpRouter = require("./routes/index.js");
 const socketIo = require("socket.io");
 
+//functions for resetting the db
 const makeDatabase = require("./functions/makeDatabase");
 const seedDatabase = require("./functions/seedDatabase");
 
+//enable sockets
 const http = require("http");
 const server = http.createServer(app);
 const io = socketIo(server, {
@@ -20,15 +22,19 @@ const formatMessage = require("./functions/messages");
 
 const PORT = 3500;
 
+//socket actions
 io.on("connection", (socket) => {
+  //join chat room
   socket.on("joinRoom", (chatId) => {
     socket.join(chatId);
   });
 
+  //leave chat room
   socket.on("leaveRoom", (chatId) => {
     socket.leave(chatId);
   });
 
+  //update chat preview icons
   socket.on("iconUpdate", (messageObject) => {
     let formattedMessage = formatMessage(
       messageObject.id,
@@ -54,6 +60,7 @@ const syncDB = async () => {
     // await db.sync({ force: true });
     // await seedDatabase();
   } catch (error) {
+    //if local db doesn't exist, create and seed one
     if (error.name == "SequelizeConnectionError") {
       // await makeDatabase(); //uncomment if using local db
       await db.sync({ force: true });
@@ -65,13 +72,6 @@ const syncDB = async () => {
 };
 
 const utilities = async () => {
-  // app.use((req, res, next) => {
-  //     res.setHeader("Access-Control-Allow-Origin", "*");
-  //     res.setHeader('Access-Control-Allow-Methods', '*');
-  //     res.setHeader('Access-Control-Allow-Headers', "*");
-  //     next();
-  // });
-
   app.use(cors());
 
   app.use(express.json());
@@ -83,6 +83,7 @@ const utilities = async () => {
   });
 };
 
+//run the server
 const start = async () => {
   await syncDB();
   await utilities();
